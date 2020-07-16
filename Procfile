@@ -1,0 +1,1 @@
+-Dspring.datasource.url=jdbc:mysql://localhost:3306/0_0_sl_exam_test_0?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
