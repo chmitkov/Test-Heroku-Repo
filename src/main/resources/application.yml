@@ -1,0 +1,54 @@
+spring:
+#  datasource:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    #password: ''
+#    password: 12345
+#    url: jdbc:mysql://localhost:3306/last_music_db_my_w?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+#    username: root
+#
+#
+#  jpa:
+#    #For MySQL 8
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    #For MySQL 5
+#    #database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    hibernate:
+#      ddl-auto: update
+#    open-in-view: false
+
+    #For Heroku env variables
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    #password: ''
+    password: ${JDBC_DATABASE_PASSWORD:}
+    url: ${JDBC_DATABASE_URL:}
+    username: ${JDBC_DATABASE_USERNAME:}
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+    #For PostgreSQL Dialect
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
+#  servlet:
+#    multipart:
+#    max-request-size: 5MB
+#    max-file-size: 5MB
+#  mvc:
+#    hiddenmethod:
+#    filter:
+#    enabled: true
+
+
+logging:
+  level:
+    org: WARN
+    org.hibernate.SQL: DEBUG
+
+carousel:
+  images: depeche.png, ico.png, madonna.jpg, metallica.jpg, queen.jpg, roxette.png
+  cron: "0 */1 * * * *"
+
+server:
+  port: =${PORT:8080}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment :: head"></head>
+<body>
+<header>
+    <nav th:replace="fragments/fragment :: navigation"></nav>
+</header>
+<main class="p-5 bg-blur text-center">
+    <h1 class="text-light border-bottom">Add Album</h1>
+    <div class="d-flex justify-content-center">
+        <form th:action="@{/test/multipart}" method="POST"
+              enctype="multipart/form-data"
+              class="text-light">
+            <div class="form-row m-5">
+                <div class="col">
+                    <label for="name">Album name</label>
+                    <input  id="name" name="name" type="text" class="form-control" placeholder="Album name">
+                </div>
+            </div>
+            <div class="form-row m-5">
+                <div class="col">
+                    <label for="file">File name</label>
+                    <input  id="file" name="file" type="file" class="form-control" placeholder="Chose file">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-primary btn-block w-50" type="submit">Add New Album</button>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

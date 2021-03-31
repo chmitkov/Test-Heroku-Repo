@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment :: head"></head>
+<body>
+<header>
+    <nav th:replace="fragments/fragment :: navigation"></nav>
+</header>
+<main class="p-5 align-content-center bg-blur">
+    <div class="justify-content-center">
+        <h1 class="text-light border-left border-white pl-4">Album Details</h1>
+    </div>
+    <div class="row rounded mb-5 mt-3">
+        <div th:object="${album}" class="col-md-6 bg-blur text-light rounded ">
+            <dl class="row pt-3">
+                <dt class="col-sm-3">Name</dt>
+                <dd class="col-sm-9" th:text="*{name}"></dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9" th:text="*{description}">
+                </dd>
+
+                <dt class="col-sm-3">Artist</dt>
+                <dd class="col-sm-9" th:text="*{artist}">
+                </dd>
+
+                <dt class="col-sm-3">Release Date</dt>
+                <dd class="col-sm-9" th:text="*{releaseDate}">
+                </dd>
+
+                <dt class="col-sm-3">Price & Copies</dt>
+                <dd class="col-sm-9">
+                    <dl class="row">
+                        <dt class="col-sm-4">Price</dt>
+                        <dd class="col-sm-8" th:text="*{price}">
+                        </dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-sm-4">Copies</dt>
+                        <dd class="col-sm-8" th:text="*{copies}">
+                        </dd>
+                    </dl>
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6 bg-transparent rounded">
+            <div class="rounded embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" th:src="@{'https://www.youtube.com/embed/' + ${album.videoUrl}}"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="row rounded mb-5 mt-3">
+        <div class="container mt-5">
+            <div class="d-flex justify-content-center row ">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column comment-section ">
+                        <div th:each="c : ${comments}" th:object="${c}" class="bg-blur text-light p-2 rounded">
+                            <div class="d-flex flex-row user-info">
+                                <img class="rounded-circle"
+                                     th:src="${c.user.imageUrl}"
+                                     width="40">
+                                <div class="d-flex flex-column justify-content-start ml-2">
+                                    <span th:text="*{user.username}" class="d-block font-weight-bold name"></span>
+                                    <span th:text="|Comment added on - *{#temporals.format(addedOn, 'dd-MM-yyyy HH:mm')}|" class="date text-black-50"></span></div>
+                            </div>
+                            <div class="mt-2">
+                                <p th:text="*{text}" class="comment-text"></p>
+                            </div>
+                        </div>
+                        <div class="bg-blur text-light rounded ">
+                            <div class="d-flex flex-row fs-12 float-right">
+                                <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span
+                                        class="ml-1">Like</span></div>
+                                <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span>
+                                </div>
+                                <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blur text-light p-2 rounded">
+                            <form action="/comments/add" method="POST">
+                                <div class="d-flex flex-row align-items-start">
+                                    <img class="rounded-circle"
+                                         src="https://i.imgur.com/RpzrMR2.jpg"
+                                         width="40"><textarea name="text"
+                                                              class="form-control ml-1 shadow-none textarea"></textarea>
+                                </div>
+                                <input type="hidden" name="albumId" th:value="${album.id}">
+                                <div class="mt-2 text-right">
+                                    <button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment
+                                    </button>
+                                    <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/fragment :: footer"></footer>
+<script src="/js/search-bar.js"></script>
+</body>
+</html>

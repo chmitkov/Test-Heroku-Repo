@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment :: head"></head>
+<body>
+<header>
+    <nav th:replace="fragments/fragment :: navigation"></nav>
+</header>
+<main class="p-5 align-content-center bg-blur my-register-div">
+    <h1 class="text-light border-bottom">Register</h1>
+    <div class="d-flex justify-content-center ">
+        <div class="row g-3 align-items-center">
+            <img alt="Picture of Madonna" src="/img/madonna.jpg" class="w-50 rounded">
+        </div>
+        <div class="row g-3">
+            <form
+                th:action="@{/users/register}"
+                th:object="${registrationModel}"
+                method="POST">
+                <!-- Username -->
+                <div>
+                    <div class="col-auto">
+                        <label for="inputUsername" class="col-form-label text-light">Username</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="username"
+                               type="text"
+                               th:value="*{username}"
+                               th:errorclass="is-invalid"
+                               id="inputUsername"
+                               class="form-control"
+                               aria-describedby="usernameHelpInline">
+                          <small id="usernameError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">Username length must be more than 3 characters</small>
+                        <small id="usernameUniqueError"
+                               th:if="${notUnique}"
+                               class="text-light form-text bg-danger rounded">Username is already occupied</small>
+
+                    </div>
+                </div>
+                <!-- EO: Username -->
+
+                <!-- First name -->
+                <div>
+                    <div class="col-auto">
+                        <label for="inputFullName" class="col-form-label text-light">Full Name</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="fullName"
+                               th:value="*{fullName}"
+                               th:errorClass="is-invalid"
+                               type="text"
+                               id="inputFullName"
+                               class="form-control"
+                               aria-describedby="fullNameHelpInline">
+                        <small id="fullNameError"
+                             class="invalid-feedback text-light form-text bg-danger rounded">Full name length must be more than 3 characters</small>
+                    </div>
+                </div>
+                <!-- EO: First name -->
+
+                <!-- Email -->
+                <div>
+                    <div class="col-auto">
+                        <label for="inputEmail" class="col-form-label text-light">Email</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="email"
+                               th:value="*{email}"
+                               th:errorClass="is-invalid"
+                               type="text"
+                               id="inputEmail"
+                               class="form-control"
+                               aria-describedby="emailHelpInline">
+                        <small id="emailError"
+                          class="invalid-feedback text-light form-text bg-danger rounded">Must be valid email</small>
+                    </div>
+                </div>
+                <!-- EO: Email -->
+
+                <!-- Password -->
+                <div>
+                    <div class="col-auto">
+                        <label for="inputPassword" class="col-form-label text-light">Password</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="password"
+                               th:errorClass="is-invalid"
+                               type="password"
+                               id="inputPassword"
+                               class="form-control"
+                               aria-describedby="passwordHelpInline">
+                        <small id="passwordError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            Password length must be between 5 and 20 characters and passwords should match.
+                        </small>
+                    </div>
+                </div>
+                <!-- EO: Password -->
+
+                <!-- Password confirm -->
+                <div>
+                    <div class="col-auto">
+                        <label for="inputConfirmPassword" class="col-form-label text-light">Confirm Password</label>
+                    </div>
+                    <div class="col-auto">
+                        <input name="confirmPassword"
+                               type="password"
+                               th:errorClass="is-invalid"
+                               id="inputConfirmPassword"
+                               class="form-control"
+                               aria-describedby="confirmPasswordHelpInline">
+                        <small id="confirmPasswordError"
+                               class="invalid-feedback text-light form-text bg-danger rounded">
+                            Password length must be between 5 and 20 characters and passwords should match.
+                        </small>
+                    </div>
+                </div>
+                <!-- EO: Password confirm -->
+
+                <div class="d-flex justify-content-center mt-4">
+                    <button class="btn btn-primary btn-block w-50" type="submit">Register</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>
